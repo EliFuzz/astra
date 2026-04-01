@@ -1,0 +1,15 @@
+# IDE
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/target/
+/pkg/
+/web/pkg/
+*.wasm
+
+web/assets
+web/pkg

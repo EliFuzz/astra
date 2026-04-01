@@ -1,0 +1,21 @@
+[package]
+name = "astra-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Core domain primitives for astra whiteboard"
+
+[dependencies]
+kurbo.workspace = true
+log.workspace = true
+peniko.workspace = true
+png.workspace = true
+serde.workspace = true
+uuid.workspace = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+web-time.workspace = true
+
+[dev-dependencies]
+kurbo.workspace = true

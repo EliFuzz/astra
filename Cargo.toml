@@ -1,0 +1,87 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core",
+    "crates/canvas",
+    "crates/storage",
+    "crates/render",
+    "crates/widgets",
+    "crates/app",
+    "crates/web",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.86"
+
+[workspace.dependencies]
+kurbo = { version = "0.13.0", features = ["serde"] }
+peniko = "0.6.0"
+
+vello = {version = "0.8.0"}
+roughr = "0.12"
+
+winit = "0.30.13"
+
+egui = { version = "0.33.3", default-features = false, features = ["default_fonts"] }
+egui-wgpu = "0.33.3"
+egui-winit = { version = "0.33.3", default-features = false }
+egui_extras = { version = "0.33.3", default-features = false, features = ["image"] }
+
+pollster = "0.4"
+
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+
+thiserror = "2.0.18"
+
+log = "0.4.29"
+env_logger = "0.11.9"
+
+wasm-bindgen = "0.2.114"
+wasm-bindgen-futures = "0.4.64"
+web-sys = "0.3.91"
+js-sys = "0.3.91"
+console_error_panic_hook = "0.1.7"
+console_log = "1"
+web-time = "1.1"
+
+uuid = { version = "1.22.0", features = ["v4", "js", "serde"] }
+
+rfd = "0.17.2"
+
+arboard = "3.6.1"
+
+png = "0.18.1"
+
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg", "webp"] }
+
+tempfile = "3.27.0"
+
+[patch.crates-io]
+egui = { git = "https://github.com/emilk/egui", rev = "8b2315375b6cf13291ee658a498cb45fc379f600" }
+egui-wgpu = { git = "https://github.com/emilk/egui", rev = "8b2315375b6cf13291ee658a498cb45fc379f600" }
+egui-winit = { git = "https://github.com/emilk/egui", rev = "8b2315375b6cf13291ee658a498cb45fc379f600" }
+egui_extras = { git = "https://github.com/emilk/egui", rev = "8b2315375b6cf13291ee658a498cb45fc379f600" }
+
+[profile.release]
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = false
+overflow-checks = false
+strip = "symbols"
+incremental = false
+split-debuginfo = "off"
+
+[profile.dev]
+debug = "line-tables-only"
+incremental = true
+opt-level = 0
+
+[profile.dev.package."*"]
+opt-level = 2
+strip = "debuginfo"

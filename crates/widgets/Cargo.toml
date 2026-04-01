@@ -1,0 +1,16 @@
+[package]
+name = "astra-widgets"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Reusable egui widget components"
+
+[dependencies]
+astra-canvas = { path = "../canvas", version = "0.1.0" }
+astra-render = { path = "../render", version = "0.1.0" }
+egui.workspace = true
+egui_extras.workspace = true
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+arboard = { workspace = true }

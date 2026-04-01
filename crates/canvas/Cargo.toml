@@ -1,0 +1,30 @@
+[package]
+name = "astra-canvas"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Document model, shapes, editing logic for astra"
+
+[dependencies]
+astra-core = { path = "../core", version = "0.1.0" }
+kurbo.workspace = true
+peniko.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+winit.workspace = true
+winit_input_helper = "0.17"
+log.workspace = true
+base64 = "0.22.1"
+rstar = "0.12.2"
+
+[dev-dependencies]
+kurbo.workspace = true
+tempfile.workspace = true
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "canvas_bench"
+harness = false

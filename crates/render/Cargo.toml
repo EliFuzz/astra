@@ -1,0 +1,33 @@
+[package]
+name = "astra-render"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Renderer abstraction and implementations for astra"
+
+[features]
+default = ["vello-renderer"]
+vello-renderer = ["dep:vello", "dep:parley"]
+
+[dependencies]
+astra-canvas = { path = "../canvas", version = "0.1.0" }
+astra-core = { path = "../core", version = "0.1.0" }
+kurbo.workspace = true
+peniko.workspace = true
+thiserror.workspace = true
+log.workspace = true
+png.workspace = true
+image.workspace = true
+vello = { workspace = true, optional = true }
+parley = { version = "0.7", optional = true, default-features = false, features = [
+    "std",
+] }
+rex = { git = "https://github.com/KenyC/ReX", features = [
+    "ttfparser-fontparser",
+] }
+ttf-parser = "0.25.1"
+roughr.workspace = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wuff = { version = "0.2.3", default-features = true }
