@@ -61,3 +61,6 @@ web-sys = { workspace = true, features = [
     "Window", "Document", "Element", "HtmlCanvasElement",
     "HtmlElement", "CssStyleDeclaration",
 ] }
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
