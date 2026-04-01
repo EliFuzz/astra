@@ -17,7 +17,19 @@ if [ ! -f "$WASM_FILE" ]; then
     exit 1
 fi
 
-wasm-opt -Oz --strip-debug --strip-dwarf --strip-producers --vacuum --dce --duplicate-function-elimination --enable-nontrapping-float-to-int --enable-bulk-memory --merge-similar-functions --converge -o "$WASM_FILE" "$WASM_FILE"
+wasm-opt -Oz \
+    --strip-debug \
+    --strip-dwarf \
+    --strip-producers \
+    --vacuum \
+    --dce \
+    --duplicate-function-elimination \
+    --enable-nontrapping-float-to-int \
+    --enable-bulk-memory \
+    --merge-similar-functions \
+    --converge \
+    --enable-sign-ext \
+    -o "$WASM_FILE" "$WASM_FILE"
 
 rm -f pkg/.gitignore pkg/package.json pkg/README.md
 rm -rf web/pkg
