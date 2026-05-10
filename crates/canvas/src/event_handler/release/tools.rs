@@ -1,19 +1,18 @@
 use kurbo::Point;
 
 use crate::canvas::Canvas;
+use crate::elbow::compute_routed_path;
+use crate::event_handler::EventHandler;
+use crate::event_handler::snap_helpers::{
+    collect_routing_obstacles, find_shape_binding_snap, make_arrow_binding,
+};
 use crate::input::InputState;
 use crate::shapes::{Freehand, Shape, ShapeStyle, ShapeTrait, Text};
 use crate::snap::{GRID_SIZE, snap_line_endpoint_isometric, snap_to_grid};
 use crate::tools::ToolKind;
 
-use crate::event_handler::EventHandler;
-
-use super::super::snap_helpers::{
-    collect_routing_obstacles, find_shape_binding_snap, make_arrow_binding,
-};
-
 impl EventHandler {
-    pub(super) fn release_tools(
+    pub fn release_tools(
         &mut self,
         canvas: &mut Canvas,
         world_point: Point,
@@ -83,20 +82,22 @@ impl EventHandler {
                 canvas.tool_manager.cancel();
             }
             ToolKind::Line | ToolKind::Arrow => {
-                let end_point = if let Some(start) = self.line_start_point {
-                    let angle_result = snap_line_endpoint_isometric(
-                        start,
-                        world_point,
-                        angle_snap_enabled,
-                        grid_snap_enabled,
-                        false,
-                        GRID_SIZE,
-                    );
-                    angle_result.point
-                } else if grid_snap_enabled {
-                    snap_to_grid(world_point, GRID_SIZE).point
-                } else {
-                    world_point
+                let end_point = match self.line_start_point {
+                    Some(start) => {
+                        let angle_result = snap_line_endpoint_isometric(
+                            start,
+                            world_point,
+                            angle_snap_enabled,
+                            grid_snap_enabled,
+                            false,
+                            GRID_SIZE,
+                        );
+                        find_shape_binding_snap(canvas, world_point, &[])
+                            .map(|(_, point, _, _)| point)
+                            .unwrap_or(angle_result.point)
+                    }
+                    None if grid_snap_enabled => snap_to_grid(world_point, GRID_SIZE).point,
+                    None => world_point,
                 };
 
                 self.line_start_point = None;
@@ -128,7 +129,7 @@ impl EventHandler {
                                     exclude.push(b.target_id);
                                 }
                                 let obstacles = collect_routing_obstacles(canvas, &exclude);
-                                arrow.intermediate_points = crate::elbow::compute_routed_path(
+                                arrow.intermediate_points = compute_routed_path(
                                     arrow.start,
                                     exit_side,
                                     arrow.end,

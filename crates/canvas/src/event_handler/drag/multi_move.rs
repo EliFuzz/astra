@@ -121,7 +121,7 @@ impl EventHandler {
     }
 }
 
-fn update_bound_arrows(canvas: &mut Canvas, moved_ids: Vec<ShapeId>) {
+pub fn update_bound_arrows(canvas: &mut Canvas, moved_ids: Vec<ShapeId>) {
     let mut arrow_updates: Vec<ArrowUpdate> = Vec::new();
 
     for &moved_id in &moved_ids {

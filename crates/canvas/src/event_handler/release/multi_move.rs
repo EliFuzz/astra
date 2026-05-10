@@ -2,6 +2,7 @@ use kurbo::Affine;
 
 use crate::canvas::Canvas;
 use crate::event_handler::EventHandler;
+use crate::event_handler::drag::update_bound_arrows;
 
 impl EventHandler {
     pub(super) fn release_multi_move(&mut self, canvas: &mut Canvas) -> bool {
@@ -50,6 +51,7 @@ impl EventHandler {
                     *shape = new_shape;
                 }
             }
+            update_bound_arrows(canvas, mm.original_shapes.keys().copied().collect());
         }
 
         true
