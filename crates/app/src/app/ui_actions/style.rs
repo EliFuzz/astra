@@ -1,6 +1,6 @@
 use super::super::AppState;
 use crate::ui::UiAction;
-use astra_canvas::shapes::{FillPattern, PathStyle, Shape, Sloppiness, StrokeStyle};
+use astra_canvas::shapes::{FillPattern, PathStyle, Shape, ShapeTrait, Sloppiness, StrokeStyle};
 
 pub(super) fn apply(
     state: &mut AppState,
@@ -162,11 +162,17 @@ pub(super) fn apply(
             for &id in &state.canvas.selection.clone() {
                 apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| {
                     if let Shape::Text(text) = shape {
+                        let bounds = text.bounds();
+                        let scale = s / text.font_size.max(f64::EPSILON);
                         text.font_size = s;
-                        text.invalidate_cache();
+                        text.set_cached_size(bounds.width() * scale, bounds.height() * scale);
                     }
                 });
-                fit_group_text(&mut state.canvas.document, id);
+                if let Some(mut guard) = state.canvas.document.get_shape_mut(id) {
+                    if let Shape::Group(group) = &mut *guard {
+                        group.fit_and_center_text_children();
+                    }
+                }
             }
         }
         _ => {}
@@ -185,17 +191,6 @@ fn apply_to_shape_or_children(
             }
         } else {
             f(&mut guard);
-        }
-    }
-}
-
-fn fit_group_text(
-    doc: &mut astra_canvas::canvas::CanvasDocument,
-    id: astra_canvas::shapes::ShapeId,
-) {
-    if let Some(mut guard) = doc.get_shape_mut(id) {
-        if let Shape::Group(group) = &mut *guard {
-            group.fit_and_center_text_children();
         }
     }
 }
