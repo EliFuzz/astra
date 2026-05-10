@@ -47,7 +47,12 @@ impl Shape {
             Shape::Arrow(s) => s.id = new_id,
             Shape::Freehand(s) => s.id = new_id,
             Shape::Text(s) => s.id = new_id,
-            Shape::Group(s) => s.id = new_id,
+            Shape::Group(s) => {
+                s.id = new_id;
+                for child in &mut s.children {
+                    child.regenerate_id();
+                }
+            }
             Shape::Image(s) => s.id = new_id,
             Shape::Math(s) => s.id = new_id,
         }

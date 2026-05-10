@@ -1,6 +1,6 @@
 use astra_canvas::{
     Camera, Canvas, CanvasDocument,
-    shapes::{Rectangle, Shape, ShapeTrait},
+    shapes::{Group, Rectangle, Shape, ShapeTrait, Text},
 };
 use kurbo::{Point, Vec2};
 
@@ -200,4 +200,22 @@ fn paste_shapes_from_json_regenerates_ids() {
     assert_eq!(ids.len(), 1);
     assert_ne!(ids[0], original_id);
     assert!(canvas.document.get_shape(ids[0]).is_some());
+}
+
+#[test]
+fn paste_group_from_json_regenerates_child_ids() {
+    let mut canvas = Canvas::new();
+    let text = Text::new(Point::new(20.0, 20.0), "label".to_string());
+    let original_text_id = text.id();
+    let json = serde_json::to_string(&vec![Shape::Group(Group::new(vec![
+        Shape::Rectangle(Rectangle::new(Point::new(10.0, 10.0), 50.0, 30.0)),
+        Shape::Text(text),
+    ]))])
+    .unwrap();
+    let ids = canvas.paste_shapes_from_json(&json, Vec2::ZERO).unwrap();
+
+    match canvas.document.get_shape(ids[0]).unwrap() {
+        Shape::Group(group) => assert!(group.children().iter().all(|s| s.id() != original_text_id)),
+        _ => panic!("expected group"),
+    }
 }
