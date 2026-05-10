@@ -14,7 +14,7 @@ impl VelloRenderer {
         text.set_cached_size(cached.width, cached.height);
         let text_transform = transform * Affine::translate((text.position.x, text.position.y));
 
-        for (font_data, font_size, brush, glyphs, skew) in &cached.glyph_runs {
+        for (font_data, font_size, brush, glyphs, skew, normalized_coords) in &cached.glyph_runs {
             let glyph_xform = skew.map(|angle| Affine::skew(angle, 0.0));
             scene
                 .draw_glyphs(font_data)
@@ -23,6 +23,7 @@ impl VelloRenderer {
                 .transform(text_transform)
                 .glyph_transform(glyph_xform)
                 .font_size(*font_size)
+                .normalized_coords(normalized_coords)
                 .draw(Fill::NonZero, glyphs.iter().cloned());
         }
     }

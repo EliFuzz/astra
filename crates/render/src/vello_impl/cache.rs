@@ -8,6 +8,7 @@ pub(crate) type GlyphRun = (
     peniko::Brush,
     Vec<vello::Glyph>,
     Option<f64>,
+    Vec<i16>,
 );
 
 #[derive(Debug)]

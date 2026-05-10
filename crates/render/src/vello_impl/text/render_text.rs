@@ -115,6 +115,7 @@ impl VelloRenderer {
                     .map(|angle| angle.to_radians().tan() as f64);
                 let glyph_xform = skew_angle.map(|angle| Affine::skew(angle, 0.0));
                 let run_brush = glyph_run.style().brush.clone();
+                let normalized_coords = run.normalized_coords().to_vec();
 
                 let glyphs: Vec<vello::Glyph> = glyph_run
                     .glyphs()
@@ -139,10 +140,17 @@ impl VelloRenderer {
                         .transform(text_transform)
                         .glyph_transform(glyph_xform)
                         .font_size(run_font_size)
-                        .normalized_coords(run.normalized_coords())
+                        .normalized_coords(&normalized_coords)
                         .draw(Fill::NonZero, glyphs.iter().cloned());
 
-                    cached_runs.push((font.clone(), run_font_size, run_brush, glyphs, skew_angle));
+                    cached_runs.push((
+                        font.clone(),
+                        run_font_size,
+                        run_brush,
+                        glyphs,
+                        skew_angle,
+                        normalized_coords,
+                    ));
                 }
             }
         }
