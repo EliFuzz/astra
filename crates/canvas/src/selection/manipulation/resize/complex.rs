@@ -81,8 +81,9 @@ pub(crate) fn apply_corner_resize_group(
         let scale = (sx + sy) / 2.0;
         for child in group.children_mut() {
             if let Shape::Text(text) = child {
+                let bounds = text.bounds();
                 text.font_size *= scale;
-                text.invalidate_cache();
+                text.set_cached_size(bounds.width() * scale, bounds.height() * scale);
             }
         }
         group.fit_and_center_text_children();

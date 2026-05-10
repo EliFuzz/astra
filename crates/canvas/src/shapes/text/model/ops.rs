@@ -1,7 +1,7 @@
 use super::super::font_family::FontFamily;
 use super::super::font_weight::FontWeight;
 use super::Text;
-use crate::shapes::{SerializableColor, ShapeId, ShapeStyle};
+use crate::shapes::{SerializableColor, ShapeId, ShapeStyle, ShapeTrait};
 use kurbo::Point;
 use std::sync::RwLock;
 use uuid::Uuid;
@@ -138,16 +138,16 @@ impl Text {
         let max_h = (parent_bounds.height() - padding).max(1.0);
         let center = parent_bounds.center();
 
-        self.invalidate_cache();
-        let tw = self.approximate_width();
-        let th = self.approximate_height();
+        let bounds = self.bounds();
+        let mut tw = bounds.width();
+        let mut th = bounds.height();
         if tw > max_w || th > max_h {
             let shrink = (max_w / tw.max(1.0)).min(max_h / th.max(1.0));
             self.font_size *= shrink;
-            self.invalidate_cache();
+            tw *= shrink;
+            th *= shrink;
+            self.set_cached_size(tw, th);
         }
-        let tw = self.approximate_width().max(20.0);
-        let th = self.approximate_height();
         self.position = Point::new(center.x - tw / 2.0, center.y - th / 2.0);
     }
 
