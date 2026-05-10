@@ -1,6 +1,6 @@
 use super::{UiAction, UiState};
-use crate::{default_btn, primary_btn};
 use crate::theme;
+use crate::{default_btn, primary_btn};
 use egui::{Align2, Context, Frame, Pos2, Vec2};
 
 pub fn render_math_editor(ctx: &Context, ui_state: &mut UiState) -> Option<UiAction> {
@@ -88,11 +88,9 @@ pub fn render_math_editor(ctx: &Context, ui_state: &mut UiState) -> Option<UiAct
 
                         ui.add_space(4.0);
                         ui.label(
-                            egui::RichText::new(
-                                "Examples: x^2",
-                            )
-                            .size(11.0)
-                            .color(theme::text_muted()),
+                            egui::RichText::new("Examples: x^2")
+                                .size(11.0)
+                                .color(theme::text_muted()),
                         );
 
                         ui.add_space(16.0);

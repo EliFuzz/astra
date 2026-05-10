@@ -78,7 +78,9 @@ pub fn list_documents_async() {
             Ok(docs) => {
                 let filtered: Vec<String> = docs
                     .into_iter()
-                    .filter(|id| id != "__last__" && id != astra_storage::preferences::PREFERENCES_KEY)
+                    .filter(|id| {
+                        id != "__last__" && id != astra_storage::preferences::PREFERENCES_KEY
+                    })
                     .collect();
                 pending::set_pending_document_list(filtered);
             }
@@ -207,8 +209,7 @@ async fn tiled_export_async(
 ) -> Option<Vec<u8>> {
     use std::io::Write;
 
-    let mut gpu_renderer =
-        vello::Renderer::new(device, vello::RendererOptions::default()).ok()?;
+    let mut gpu_renderer = vello::Renderer::new(device, vello::RendererOptions::default()).ok()?;
     let mut shape_renderer = astra_render::VelloRenderer::new_for_export(export.scale);
 
     let max_tex = device.limits().max_texture_dimension_2d;
@@ -236,10 +237,9 @@ async fn tiled_export_async(
 
         if export.should_embed_metadata() {
             if let Ok(json) = export.document.to_json_compact() {
-                if let Err(e) = encoder.add_ztxt_chunk(
-                    astra_render::PNG_SCENE_METADATA_KEY.to_string(),
-                    json,
-                ) {
+                if let Err(e) =
+                    encoder.add_ztxt_chunk(astra_render::PNG_SCENE_METADATA_KEY.to_string(), json)
+                {
                     log::warn!("Failed to add metadata chunk: {:?}", e);
                 }
             }

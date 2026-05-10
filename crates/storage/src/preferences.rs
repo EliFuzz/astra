@@ -1,5 +1,5 @@
-use astra_core::preferences::PreferredGridStyle;
 use astra_core::SerializableColor;
+use astra_core::preferences::PreferredGridStyle;
 use serde::{Deserialize, Serialize};
 
 pub const PREFERENCES_KEY: &str = "__preferences__";

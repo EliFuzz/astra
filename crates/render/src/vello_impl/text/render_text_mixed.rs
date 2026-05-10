@@ -1,4 +1,4 @@
-use super::mixed_segments::{parse_segments, TextSegment};
+use super::mixed_segments::{TextSegment, parse_segments};
 use super::render_text_mixed_plain_seg::MixedPlainSegParams;
 use crate::vello_impl::VelloRenderer;
 use kurbo::Affine;
@@ -40,12 +40,7 @@ impl VelloRenderer {
                         let render_x = text.position.x + x_offset;
                         let render_y = text.position.y + y_offset + font_size * 0.15;
                         let (w, h) = self.render_latex_at(
-                            latex,
-                            font_size,
-                            render_x,
-                            render_y,
-                            text_color,
-                            transform,
+                            latex, font_size, render_x, render_y, text_color, transform,
                         );
                         x_offset += w;
                         line_h = line_h.max(h + font_size * 0.15);

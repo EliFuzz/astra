@@ -1,5 +1,5 @@
-use super::axis::{SpacingAxis, detect_equal_spacing};
 use super::super::super::types::SmartGuideResult;
+use super::axis::{SpacingAxis, detect_equal_spacing};
 use kurbo::Rect;
 
 #[allow(clippy::too_many_arguments)]

@@ -1,6 +1,6 @@
 use super::super::super::{UiAction, UiState};
-use crate::{default_btn, input_text, primary_btn, secondary_btn};
 use crate::theme;
+use crate::{default_btn, input_text, primary_btn, secondary_btn};
 use egui::{Align2, Context, CornerRadius, Frame, Margin, Pos2, Stroke, Vec2};
 
 pub fn render_save_dialog(ctx: &Context, ui_state: &mut UiState) -> Option<UiAction> {

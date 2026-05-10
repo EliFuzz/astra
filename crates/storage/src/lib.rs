@@ -1,7 +1,7 @@
 mod autosave;
 mod memory;
-mod platform;
 pub mod pending;
+mod platform;
 pub mod preferences;
 
 pub use autosave::{

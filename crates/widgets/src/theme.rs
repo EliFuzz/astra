@@ -32,7 +32,11 @@ fn wv(bg: Color32, fg: Color32, stroke: Stroke, cr: CornerRadius) -> WidgetVisua
 
 pub fn apply_to_egui(ctx: &egui::Context) {
     let dark = is_dark();
-    let mut v = if dark { egui::Visuals::dark() } else { egui::Visuals::light() };
+    let mut v = if dark {
+        egui::Visuals::dark()
+    } else {
+        egui::Visuals::light()
+    };
     let cr = CornerRadius::same(6);
     let bdr = Stroke::new(0.5, border());
 
@@ -61,26 +65,87 @@ pub fn apply_to_egui(ctx: &egui::Context) {
     ctx.set_visuals(v);
 }
 
-pub fn text() -> Color32 { dl(Color32::from_rgb(224, 224, 230), Color32::from_rgb(28, 28, 30)) }
-pub fn text_muted() -> Color32 { dl(Color32::from_rgb(132, 132, 142), Color32::from_rgb(99, 99, 102)) }
-pub fn border() -> Color32 { dl(Color32::from_white_alpha(12), Color32::from_black_alpha(18)) }
-pub fn accent() -> Color32 { dl(Color32::from_rgb(115, 125, 150), Color32::from_rgb(90, 120, 165)) }
-pub fn hover_bg() -> Color32 { dl(Color32::from_white_alpha(8), Color32::from_black_alpha(8)) }
-pub fn selected_bg() -> Color32 { dl(Color32::from_white_alpha(16), Color32::from_black_alpha(14)) }
-pub fn button_inactive_bg() -> Color32 { dl(Color32::from_white_alpha(6), Color32::from_black_alpha(6)) }
-pub fn icon_color() -> Color32 { dl(Color32::from_rgb(156, 156, 168), Color32::from_rgb(72, 72, 74)) }
-pub fn icon_hover_color() -> Color32 { dl(Color32::from_rgb(170, 170, 180), Color32::from_rgb(44, 44, 46)) }
-pub fn separator_color() -> Color32 { dl(Color32::from_white_alpha(10), Color32::from_black_alpha(12)) }
-pub fn input_bg() -> Color32 { dl(Color32::from_black_alpha(30), Color32::from_white_alpha(200)) }
-pub fn input_border() -> Color32 { dl(Color32::from_white_alpha(14), Color32::from_black_alpha(18)) }
-pub fn input_border_hover() -> Color32 { dl(Color32::from_white_alpha(22), Color32::from_black_alpha(30)) }
-pub fn input_text_color() -> Color32 { text() }
-pub fn backdrop() -> Color32 { dl(Color32::from_black_alpha(120), Color32::from_black_alpha(80)) }
-pub fn section_label_color() -> Color32 { text_muted() }
-pub fn dialog_border() -> Color32 { border() }
-pub fn primary_button_bg() -> Color32 { accent() }
-pub fn secondary_button_bg() -> Color32 { dl(Color32::from_white_alpha(8), Color32::from_black_alpha(8)) }
-pub fn secondary_button_text() -> Color32 { text_muted() }
+pub fn text() -> Color32 {
+    dl(
+        Color32::from_rgb(224, 224, 230),
+        Color32::from_rgb(28, 28, 30),
+    )
+}
+pub fn text_muted() -> Color32 {
+    dl(
+        Color32::from_rgb(132, 132, 142),
+        Color32::from_rgb(99, 99, 102),
+    )
+}
+pub fn border() -> Color32 {
+    dl(Color32::from_white_alpha(12), Color32::from_black_alpha(18))
+}
+pub fn accent() -> Color32 {
+    dl(
+        Color32::from_rgb(115, 125, 150),
+        Color32::from_rgb(90, 120, 165),
+    )
+}
+pub fn hover_bg() -> Color32 {
+    dl(Color32::from_white_alpha(8), Color32::from_black_alpha(8))
+}
+pub fn selected_bg() -> Color32 {
+    dl(Color32::from_white_alpha(16), Color32::from_black_alpha(14))
+}
+pub fn button_inactive_bg() -> Color32 {
+    dl(Color32::from_white_alpha(6), Color32::from_black_alpha(6))
+}
+pub fn icon_color() -> Color32 {
+    dl(
+        Color32::from_rgb(156, 156, 168),
+        Color32::from_rgb(72, 72, 74),
+    )
+}
+pub fn icon_hover_color() -> Color32 {
+    dl(
+        Color32::from_rgb(170, 170, 180),
+        Color32::from_rgb(44, 44, 46),
+    )
+}
+pub fn separator_color() -> Color32 {
+    dl(Color32::from_white_alpha(10), Color32::from_black_alpha(12))
+}
+pub fn input_bg() -> Color32 {
+    dl(
+        Color32::from_black_alpha(30),
+        Color32::from_white_alpha(200),
+    )
+}
+pub fn input_border() -> Color32 {
+    dl(Color32::from_white_alpha(14), Color32::from_black_alpha(18))
+}
+pub fn input_border_hover() -> Color32 {
+    dl(Color32::from_white_alpha(22), Color32::from_black_alpha(30))
+}
+pub fn input_text_color() -> Color32 {
+    text()
+}
+pub fn backdrop() -> Color32 {
+    dl(
+        Color32::from_black_alpha(120),
+        Color32::from_black_alpha(80),
+    )
+}
+pub fn section_label_color() -> Color32 {
+    text_muted()
+}
+pub fn dialog_border() -> Color32 {
+    border()
+}
+pub fn primary_button_bg() -> Color32 {
+    accent()
+}
+pub fn secondary_button_bg() -> Color32 {
+    dl(Color32::from_white_alpha(8), Color32::from_black_alpha(8))
+}
+pub fn secondary_button_text() -> Color32 {
+    text_muted()
+}
 
 pub fn panel_bg() -> Color32 {
     dl(
@@ -90,7 +155,10 @@ pub fn panel_bg() -> Color32 {
 }
 
 pub fn canvas_bg() -> Color32 {
-    dl(Color32::from_rgb(18, 18, 24), Color32::from_rgb(250, 250, 252))
+    dl(
+        Color32::from_rgb(18, 18, 24),
+        Color32::from_rgb(250, 250, 252),
+    )
 }
 
 pub fn dialog_bg() -> Color32 {

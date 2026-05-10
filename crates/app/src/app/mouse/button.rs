@@ -13,13 +13,18 @@ fn handle_press(state: &mut AppState, mouse_btn: MouseButton, position: Point) {
                 .canvas
                 .document
                 .shapes_at_point(world_point, 5.0 / state.canvas.camera.zoom);
-            let clicked_on_editing = hits.first().map(|&id| {
-                if id == text_id { return true; }
-                if let Some(Shape::Group(g)) = state.canvas.document.get_shape(id) {
-                    return g.children.iter().any(|c| c.id() == text_id);
-                }
-                false
-            }).unwrap_or(false);
+            let clicked_on_editing = hits
+                .first()
+                .map(|&id| {
+                    if id == text_id {
+                        return true;
+                    }
+                    if let Some(Shape::Group(g)) = state.canvas.document.get_shape(id) {
+                        return g.children.iter().any(|c| c.id() == text_id);
+                    }
+                    false
+                })
+                .unwrap_or(false);
 
             if clicked_on_editing {
                 if let Some(Shape::Text(text)) = state.canvas.document.get_shape_deep(text_id) {

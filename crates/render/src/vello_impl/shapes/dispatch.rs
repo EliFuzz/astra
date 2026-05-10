@@ -99,7 +99,11 @@ impl ShapeRenderer for VelloRenderer {
                 self.render_math(math, shape_transform);
             }
             Shape::Rectangle(rect) => {
-                self.render_closed_shape_with_stroke_style(shape, rect.stroke_style, shape_transform);
+                self.render_closed_shape_with_stroke_style(
+                    shape,
+                    rect.stroke_style,
+                    shape_transform,
+                );
             }
             Shape::Diamond(diamond) => {
                 self.render_closed_shape_with_stroke_style(

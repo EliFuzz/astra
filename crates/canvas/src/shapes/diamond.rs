@@ -76,13 +76,18 @@ impl Diamond {
         let mut path = BezPath::new();
 
         if self.corner_radius > 0.0 {
-            let r = self.corner_radius.min(self.width / 4.0).min(self.height / 4.0);
+            let r = self
+                .corner_radius
+                .min(self.width / 4.0)
+                .min(self.height / 4.0);
             let hw = self.width / 2.0;
             let hh = self.height / 2.0;
             let diag = (hw * hw + hh * hh).sqrt();
             let t = if diag > 0.0 { (r / diag).min(0.5) } else { 0.0 };
 
-            let lerp = |a: Point, b: Point, f: f64| Point::new(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f);
+            let lerp = |a: Point, b: Point, f: f64| {
+                Point::new(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f)
+            };
 
             let t_r = lerp(top, right, t);
             let r_t = lerp(right, top, t);

@@ -1,6 +1,5 @@
 use super::{
-    SelectedShapeProps, UiAction, UiState, bottom_toolbar, file_menu, presence, properties,
-    toolbar,
+    SelectedShapeProps, UiAction, UiState, bottom_toolbar, file_menu, presence, properties, toolbar,
 };
 use crate::theme;
 

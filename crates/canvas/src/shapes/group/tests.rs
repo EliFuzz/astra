@@ -1,6 +1,6 @@
 use super::Group;
-use astra_core::ShapeTrait;
 use crate::shapes::{Rectangle, Shape};
+use astra_core::ShapeTrait;
 use kurbo::Point;
 
 #[test]

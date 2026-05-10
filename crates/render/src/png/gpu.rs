@@ -5,8 +5,8 @@ use astra_canvas::shapes::ShapeId;
 use kurbo::{Affine, Rect};
 use peniko::Color;
 use std::collections::HashSet;
-use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 use vello::{AaConfig, RenderParams, Scene};
 
 pub const STRIP_HEIGHT: u32 = 512;

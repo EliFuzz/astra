@@ -7,9 +7,10 @@ use crate::{
 use kurbo::{Point, Rect, Vec2};
 
 fn filled_style() -> ShapeStyle {
-    let mut style = ShapeStyle::default();
-    style.fill_color = Some(SerializableColor::black());
-    style
+    ShapeStyle {
+        fill_color: Some(SerializableColor::black()),
+        ..Default::default()
+    }
 }
 
 #[test]

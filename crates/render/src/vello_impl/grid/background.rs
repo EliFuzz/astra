@@ -143,13 +143,9 @@ impl VelloRenderer {
             .then_some((sx, sy, ex, ey, gs))
     }
 
-    pub(crate) fn render_grid_lines(
-        &mut self,
-        viewport: Rect,
-        transform: Affine,
-        grid_size: f64,
-    ) {
-        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size) else {
+    pub(crate) fn render_grid_lines(&mut self, viewport: Rect, transform: Affine, grid_size: f64) {
+        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size)
+        else {
             return;
         };
         let (c, r) = density_cols_rows(sx, sy, ex, ey, gs);
@@ -198,7 +194,8 @@ impl VelloRenderer {
         transform: Affine,
         grid_size: f64,
     ) {
-        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size) else {
+        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size)
+        else {
             return;
         };
         let (c, r) = density_cols_rows(sx, sy, ex, ey, gs);
@@ -220,13 +217,9 @@ impl VelloRenderer {
         self.scene.stroke(&stroke, transform, color, None, &path);
     }
 
-    pub(super) fn render_grid_dots(
-        &mut self,
-        viewport: Rect,
-        transform: Affine,
-        grid_size: f64,
-    ) {
-        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size) else {
+    pub(super) fn render_grid_dots(&mut self, viewport: Rect, transform: Affine, grid_size: f64) {
+        let Some((sx, sy, ex, ey, gs)) = Self::effective_grid(viewport, transform, grid_size)
+        else {
             return;
         };
         let (c, r) = density_cols_rows(sx, sy, ex, ey, gs);
@@ -246,6 +239,7 @@ impl VelloRenderer {
             x += gs;
             nx += 1;
         }
-        self.scene.fill(Fill::NonZero, transform, color, None, &path);
+        self.scene
+            .fill(Fill::NonZero, transform, color, None, &path);
     }
 }

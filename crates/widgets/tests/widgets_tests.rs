@@ -21,8 +21,10 @@ fn sizing_large_is_32() {
 
 #[test]
 fn sizing_small_lt_medium_lt_large() {
-    assert!(sizing::SMALL < sizing::MEDIUM);
-    assert!(sizing::MEDIUM < sizing::LARGE);
+    const {
+        assert!(sizing::SMALL < sizing::MEDIUM);
+        assert!(sizing::MEDIUM < sizing::LARGE);
+    }
 }
 
 #[test]

@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fmt;
 
 use kurbo::{Point, Rect};
-use rstar::{RTree, AABB, RTreeObject, PointDistance};
+use rstar::{AABB, PointDistance, RTree, RTreeObject};
 
 use crate::shapes::{Shape, ShapeId};
 
@@ -136,10 +136,7 @@ impl UniformGrid {
 
     pub fn query_point(&self, point: Point) -> Vec<ShapeId> {
         let p = [point.x, point.y];
-        self.tree
-            .locate_all_at_point(&p)
-            .map(|e| e.id)
-            .collect()
+        self.tree.locate_all_at_point(&p).map(|e| e.id).collect()
     }
 
     pub fn clear(&mut self) {

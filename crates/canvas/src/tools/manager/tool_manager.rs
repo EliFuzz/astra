@@ -1,5 +1,5 @@
-use crate::platform::Instant;
 use super::super::{ToolKind, ToolState};
+use crate::platform::Instant;
 use crate::shapes::ShapeStyle;
 use kurbo::Point;
 

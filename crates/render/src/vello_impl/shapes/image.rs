@@ -54,13 +54,8 @@ impl VelloRenderer {
 
         if needs_opacity {
             let blend = BlendMode::new(Mix::Normal, Compose::SrcOver);
-            self.scene.push_layer(
-                Fill::NonZero,
-                blend,
-                opacity as f32,
-                transform,
-                &bounds,
-            );
+            self.scene
+                .push_layer(Fill::NonZero, blend, opacity as f32, transform, &bounds);
         }
 
         self.scene.draw_image(&image_data, image_transform);

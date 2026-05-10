@@ -3,4 +3,4 @@ mod state;
 #[cfg(test)]
 mod tests;
 
-pub use state::{Camera, BASE_ZOOM};
+pub use state::{BASE_ZOOM, Camera};

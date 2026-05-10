@@ -61,13 +61,11 @@ pub(super) fn apply(
             state.ui_state.corner_radius = *radius;
             let r = *radius as f64;
             for &id in &state.canvas.selection.clone() {
-                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| {
-                    match shape {
-                        Shape::Rectangle(rect) => rect.corner_radius = r,
-                        Shape::Diamond(diamond) => diamond.corner_radius = r,
-                        Shape::Image(image) => image.corner_radius = r,
-                        _ => {}
-                    }
+                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| match shape {
+                    Shape::Rectangle(rect) => rect.corner_radius = r,
+                    Shape::Diamond(diamond) => diamond.corner_radius = r,
+                    Shape::Image(image) => image.corner_radius = r,
+                    _ => {}
                 });
             }
         }
@@ -110,22 +108,20 @@ pub(super) fn apply(
             };
             state.ui_state.path_style = *level;
             for &id in &state.canvas.selection.clone() {
-                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| {
-                    match shape {
-                        Shape::Line(line) => {
-                            line.path_style = path_style;
-                            if path_style == PathStyle::Angular {
-                                line.intermediate_points.clear();
-                            }
+                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| match shape {
+                    Shape::Line(line) => {
+                        line.path_style = path_style;
+                        if path_style == PathStyle::Angular {
+                            line.intermediate_points.clear();
                         }
-                        Shape::Arrow(arrow) => {
-                            arrow.path_style = path_style;
-                            if path_style == PathStyle::Angular {
-                                arrow.intermediate_points.clear();
-                            }
-                        }
-                        _ => {}
                     }
+                    Shape::Arrow(arrow) => {
+                        arrow.path_style = path_style;
+                        if path_style == PathStyle::Angular {
+                            arrow.intermediate_points.clear();
+                        }
+                    }
+                    _ => {}
                 });
             }
         }
@@ -136,15 +132,13 @@ pub(super) fn apply(
                 _ => StrokeStyle::Dotted,
             };
             for &id in &state.canvas.selection.clone() {
-                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| {
-                    match shape {
-                        Shape::Rectangle(rect) => rect.stroke_style = stroke_style,
-                        Shape::Diamond(diamond) => diamond.stroke_style = stroke_style,
-                        Shape::Ellipse(ellipse) => ellipse.stroke_style = stroke_style,
-                        Shape::Line(line) => line.stroke_style = stroke_style,
-                        Shape::Arrow(arrow) => arrow.stroke_style = stroke_style,
-                        _ => {}
-                    }
+                apply_to_shape_or_children(&mut state.canvas.document, id, &|shape| match shape {
+                    Shape::Rectangle(rect) => rect.stroke_style = stroke_style,
+                    Shape::Diamond(diamond) => diamond.stroke_style = stroke_style,
+                    Shape::Ellipse(ellipse) => ellipse.stroke_style = stroke_style,
+                    Shape::Line(line) => line.stroke_style = stroke_style,
+                    Shape::Arrow(arrow) => arrow.stroke_style = stroke_style,
+                    _ => {}
                 });
             }
         }

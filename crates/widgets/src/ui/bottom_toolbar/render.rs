@@ -63,4 +63,3 @@ fn separator(ui: &mut egui::Ui) {
     );
     ui.add_space(8.0);
 }
-

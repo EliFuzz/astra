@@ -1,7 +1,7 @@
 use super::ClipboardResult;
+use crate::app::App;
 use crate::app::config::AppConfig;
 use crate::app::state::AppState;
-use crate::app::App;
 use astra_canvas::canvas::CanvasDocument;
 use astra_canvas::shapes::Shape;
 use astra_storage::native_io::{self, DroppedFile};

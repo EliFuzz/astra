@@ -11,6 +11,4 @@ pub use geometry::{point_to_polyline_dist, point_to_segment_dist};
 pub use platform::{Duration, Instant};
 pub use preferences::PreferredGridStyle;
 pub use shape::{ShapeId, ShapeTrait};
-pub use style::{
-    FillPattern, ShapeStyle, Sloppiness, StrokeStyle, generate_seed,
-};
+pub use style::{FillPattern, ShapeStyle, Sloppiness, StrokeStyle, generate_seed};

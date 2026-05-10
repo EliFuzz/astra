@@ -1,7 +1,7 @@
 use super::{UiAction, UiState};
 use crate::IconButton;
-use astra_canvas::tools::ToolKind;
 use crate::icon;
+use astra_canvas::tools::ToolKind;
 use egui::{Align2, Context, ImageSource, Vec2};
 
 struct Tool {

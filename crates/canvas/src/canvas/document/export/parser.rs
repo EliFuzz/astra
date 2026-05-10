@@ -28,9 +28,7 @@ impl CanvasDocument {
             let y = elem.get("y").and_then(|v| v.as_f64()).unwrap_or(0.0);
 
             let shape_style = shape_style::shape_style_from_element(elem);
-            if let Some(s) =
-                elements::shape_from_element(elem, elem_type, x, y, shape_style)
-            {
+            if let Some(s) = elements::shape_from_element(elem, elem_type, x, y, shape_style) {
                 doc.add_shape(s);
             }
         }

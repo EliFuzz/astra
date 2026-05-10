@@ -1,6 +1,6 @@
+mod platform;
 mod query_string;
 pub mod url;
-mod platform;
 
 pub use query_string::{merge_room_server_from_url_fragment, parse_room_server_query};
 

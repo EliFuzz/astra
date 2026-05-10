@@ -1,7 +1,11 @@
 use kurbo::Point;
 use serde_json::Value;
 
-pub(in crate::canvas::document::export) fn relative_points(elem: &Value, x: f64, y: f64) -> Vec<Point> {
+pub(in crate::canvas::document::export) fn relative_points(
+    elem: &Value,
+    x: f64,
+    y: f64,
+) -> Vec<Point> {
     let Some(pts) = elem.get("points").and_then(|p| p.as_array()) else {
         return Vec::new();
     };

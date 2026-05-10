@@ -149,16 +149,7 @@ pub(crate) fn export_png(
     let device = &device_handle.device;
     let queue = &device_handle.queue;
     let filename = format!("{}.png", state.canvas.document.name);
-    file_ops::spawn_png_export_async(
-        device,
-        queue,
-        scene,
-        width,
-        height,
-        filename,
-        true,
-        None,
-    );
+    file_ops::spawn_png_export_async(device, queue, scene, width, height, filename, true, None);
 }
 
 pub(crate) fn export_png_to_file(

@@ -1,11 +1,8 @@
-use super::hamburger::hamburger_button;
 use super::super::{UiAction, UiState};
 use super::dialogs::{render_open_dialog, render_open_recent_dialog, render_save_dialog};
-use crate::{
-    menu_item as widgets_menu_item,
-    menu_separator as widgets_menu_separator,
-};
+use super::hamburger::hamburger_button;
 use crate::theme;
+use crate::{menu_item as widgets_menu_item, menu_separator as widgets_menu_separator};
 use egui::{Align2, Color32, Context, Pos2, Rect, Vec2};
 
 pub fn render_file_menu(ctx: &Context, ui_state: &mut UiState) -> Option<UiAction> {
@@ -45,7 +42,9 @@ pub fn render_file_menu(ctx: &Context, ui_state: &mut UiState) -> Option<UiActio
 
                         widgets_menu_separator(ui);
 
-                        if let Some(platform_action) = super::super::platform::render_platform_menu_items(ui, ui_state) {
+                        if let Some(platform_action) =
+                            super::super::platform::render_platform_menu_items(ui, ui_state)
+                        {
                             action = Some(platform_action);
                         }
 
@@ -136,4 +135,3 @@ pub fn render_file_menu(ctx: &Context, ui_state: &mut UiState) -> Option<UiActio
 fn menu_item(ui: &mut egui::Ui, label: &str, shortcut: &str) -> bool {
     widgets_menu_item(ui, label, shortcut)
 }
-

@@ -66,7 +66,10 @@ fn apply_file_export(state: &mut AppState, render_cx: &vello::util::RenderContex
 
 fn compute_export_bounds(
     state: &AppState,
-) -> (Option<kurbo::Rect>, Option<Vec<astra_canvas::shapes::ShapeId>>) {
+) -> (
+    Option<kurbo::Rect>,
+    Option<Vec<astra_canvas::shapes::ShapeId>>,
+) {
     if state.canvas.selection.is_empty() {
         (state.canvas.document.bounds(), None)
     } else {

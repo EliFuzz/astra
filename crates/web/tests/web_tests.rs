@@ -24,10 +24,7 @@ fn normalize_ws_url_preserves_trailing_ws() {
 
 #[test]
 fn normalize_ws_url_strips_trailing_slash() {
-    assert_eq!(
-        normalize_ws_url("ws://example.com/"),
-        "ws://example.com/ws"
-    );
+    assert_eq!(normalize_ws_url("ws://example.com/"), "ws://example.com/ws");
 }
 
 #[test]
@@ -71,10 +68,7 @@ fn parse_room_server_query_with_question_prefix() {
 
 #[test]
 fn parse_room_server_query_with_hash_prefix() {
-    assert_eq!(
-        parse_room_server_query("#room=x"),
-        (Some("x".into()), None)
-    );
+    assert_eq!(parse_room_server_query("#room=x"), (Some("x".into()), None));
 }
 
 #[test]

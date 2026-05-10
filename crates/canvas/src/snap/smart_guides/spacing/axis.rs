@@ -70,8 +70,7 @@ pub(super) fn detect_equal_spacing(
 
     let mut sorted: Vec<&Rect> = candidates.to_vec();
     sorted.sort_by(|a, b| {
-        axis
-            .leading(a)
+        axis.leading(a)
             .partial_cmp(&axis.leading(b))
             .unwrap_or(std::cmp::Ordering::Equal)
     });

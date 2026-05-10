@@ -47,7 +47,10 @@ pub fn detect_smart_guides_for_point(
         let max_y = point.y.max(other_y0).max(other_y1);
 
         let mut snap_points = vec![point.y];
-        snap_points.extend(aligned_snap::collect_for_vertical_guide(guide_x, other_bounds));
+        snap_points.extend(aligned_snap::collect_for_vertical_guide(
+            guide_x,
+            other_bounds,
+        ));
 
         result.guides.push(SmartGuide {
             kind: SmartGuideKind::Vertical,
@@ -70,7 +73,10 @@ pub fn detect_smart_guides_for_point(
         let max_x = snapped_x.max(other_x0).max(other_x1);
 
         let mut snap_points = vec![snapped_x];
-        snap_points.extend(aligned_snap::collect_for_horizontal_guide(guide_y, other_bounds));
+        snap_points.extend(aligned_snap::collect_for_horizontal_guide(
+            guide_y,
+            other_bounds,
+        ));
 
         result.guides.push(SmartGuide {
             kind: SmartGuideKind::Horizontal,

@@ -18,10 +18,7 @@ pub(crate) struct MixedPlainSegParams<'a> {
 }
 
 impl VelloRenderer {
-    pub(crate) fn render_mixed_plain_seg(
-        &mut self,
-        params: MixedPlainSegParams<'_>,
-    ) -> (f64, f64) {
+    pub(crate) fn render_mixed_plain_seg(&mut self, params: MixedPlainSegParams<'_>) -> (f64, f64) {
         use parley::StyleProperty;
 
         let MixedPlainSegParams {
@@ -38,7 +35,9 @@ impl VelloRenderer {
             font_stack,
         } = params;
 
-        let mut builder = self.layout_cx.ranged_builder(&mut self.font_cx, s, 1.0, false);
+        let mut builder = self
+            .layout_cx
+            .ranged_builder(&mut self.font_cx, s, 1.0, false);
         builder.push_default(StyleProperty::FontSize(font_size as f32));
         builder.push_default(StyleProperty::Brush(brush.clone()));
         builder.push_default(StyleProperty::FontWeight(parley_weight));
@@ -73,8 +72,8 @@ impl VelloRenderer {
 
         let seg_h = layout.height() as f64;
 
-        let seg_transform = transform
-            * Affine::translate((text.position.x + x_offset, text.position.y + y_offset));
+        let seg_transform =
+            transform * Affine::translate((text.position.x + x_offset, text.position.y + y_offset));
 
         let mut advance_width: f64 = 0.0;
 

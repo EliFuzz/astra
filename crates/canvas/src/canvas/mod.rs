@@ -1,5 +1,5 @@
-pub mod document;
 mod clipboard;
+pub mod document;
 mod edit;
 mod selection_ops;
 pub mod state;

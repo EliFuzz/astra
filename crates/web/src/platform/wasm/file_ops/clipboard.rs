@@ -146,8 +146,7 @@ async fn paste_image_async(
 pub fn paste_shapes_from_clipboard_async(cursor_world: kurbo::Point) {
     wasm_bindgen_futures::spawn_local(async move {
         if let Some(text) = read_clipboard_text_async().await {
-            if let Some(shapes) =
-                astra_canvas::canvas::CanvasDocument::shapes_from_clipboard(&text)
+            if let Some(shapes) = astra_canvas::canvas::CanvasDocument::shapes_from_clipboard(&text)
             {
                 pending::set_pending_shapes(shapes, cursor_world);
             }

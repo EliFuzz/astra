@@ -55,7 +55,8 @@ impl Group {
     }
 
     pub fn non_text_bounds(&self) -> Option<kurbo::Rect> {
-        self.children.iter()
+        self.children
+            .iter()
             .filter(|c| !matches!(c, Shape::Text(_)))
             .map(|c| c.bounds())
             .reduce(|a, b| a.union(b))

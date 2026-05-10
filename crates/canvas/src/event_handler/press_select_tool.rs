@@ -11,10 +11,17 @@ use kurbo::Point;
 use super::EventHandler;
 use super::state::SelectionRect;
 
-fn find_group_child_text(canvas: &Canvas, group_id: crate::shapes::ShapeId) -> Option<crate::shapes::ShapeId> {
+fn find_group_child_text(
+    canvas: &Canvas,
+    group_id: crate::shapes::ShapeId,
+) -> Option<crate::shapes::ShapeId> {
     if let Some(Shape::Group(g)) = canvas.document.get_shape(group_id) {
         g.children.iter().find_map(|c| {
-            if matches!(c, Shape::Text(_)) { Some(c.id()) } else { None }
+            if matches!(c, Shape::Text(_)) {
+                Some(c.id())
+            } else {
+                None
+            }
         })
     } else {
         None

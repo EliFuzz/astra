@@ -181,4 +181,3 @@ fn center_text_in_group(canvas: &mut Canvas, _text_id: ShapeId, group_id: ShapeI
         g.fit_and_center_text_children();
     }
 }
-

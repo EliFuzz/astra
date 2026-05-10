@@ -90,11 +90,8 @@ impl Freehand {
             return;
         }
 
-        let (new_points, new_pressures) = super::simplify::rdp_simplify_with_pressure(
-            &self.points,
-            &self.pressures,
-            tolerance,
-        );
+        let (new_points, new_pressures) =
+            super::simplify::rdp_simplify_with_pressure(&self.points, &self.pressures, tolerance);
         self.points = new_points;
         self.pressures = new_pressures;
     }

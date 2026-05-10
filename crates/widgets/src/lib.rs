@@ -12,8 +12,8 @@ pub use buttons::{
     IconButton, IconButtonStyle, MultiToggle, MultiToggleState, TextButton, ToggleButton,
 };
 pub use colors::{
-    COLORS, Color, ColorGrid, ColorGridPosition, ColorSwatch, ColorSwatchWithWheel,
-    ColorSwatchStyle, NoColorSwatch, Palette, SHADE_LABELS, SelectionStyle, colors_match,
+    COLORS, Color, ColorGrid, ColorGridPosition, ColorSwatch, ColorSwatchStyle,
+    ColorSwatchWithWheel, NoColorSwatch, Palette, SHADE_LABELS, SelectionStyle, colors_match,
     hue_to_rgb, parse_css_color,
 };
 pub use common::{default_btn, input_text, primary_btn, secondary_btn};

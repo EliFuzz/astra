@@ -49,7 +49,10 @@ pub fn handle_cursor_moved(
 
     if state.canvas.tool_manager.current_tool == ToolKind::LaserPointer {
         state.event_handler.laser_position = Some(world_point);
-        state.event_handler.laser_trail.push_back((world_point, 1.0));
+        state
+            .event_handler
+            .laser_trail
+            .push_back((world_point, 1.0));
         if state.event_handler.laser_trail.len() > astra_canvas::event_handler::LASER_TRAIL_CAP {
             state.event_handler.laser_trail.pop_front();
         }

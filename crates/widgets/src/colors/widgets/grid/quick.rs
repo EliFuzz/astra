@@ -30,11 +30,10 @@ pub(super) fn quick_color_cell(
         }
         QuickColor::Black => {
             let is_selected = colors_match(current_color, Color32::BLACK);
-            let (clicked, _) =
-                ColorSwatch::new(Color32::BLACK, tooltip)
-                    .selected(is_selected)
-                    .grid()
-                    .show(ui);
+            let (clicked, _) = ColorSwatch::new(Color32::BLACK, tooltip)
+                .selected(is_selected)
+                .grid()
+                .show(ui);
             if clicked {
                 return Some(Color32::BLACK);
             }
@@ -45,8 +44,7 @@ pub(super) fn quick_color_cell(
             if ui.is_rect_visible(rect) {
                 let center = rect.center();
                 let radius = 8.0;
-                ui.painter()
-                    .circle_filled(center, radius, Color32::WHITE);
+                ui.painter().circle_filled(center, radius, Color32::WHITE);
                 ui.painter().circle_stroke(
                     center,
                     radius,

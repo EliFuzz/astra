@@ -95,7 +95,11 @@ fn origin_rebased_matches_transform() {
     c.zoom = 2.0;
     c.offset = Vec2::new(5e6, -3e6);
     let (t, r) = (c.transform(), c.origin_rebased_transform());
-    for p in [Point::ORIGIN, Point::new(1e7, -2e6), Point::new(-500.0, 800.0)] {
+    for p in [
+        Point::ORIGIN,
+        Point::new(1e7, -2e6),
+        Point::new(-500.0, 800.0),
+    ] {
         let (a, b) = (t * p, r * p);
         assert!((a.x - b.x).abs() < 1e-6 && (a.y - b.y).abs() < 1e-6);
     }

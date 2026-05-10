@@ -1,8 +1,8 @@
 use super::document::CanvasDocument;
 use crate::camera::Camera;
+use crate::interaction::{EditingKind, WidgetManager, WidgetState};
 use crate::shapes::{Shape, ShapeId};
 use crate::tools::{ToolKind, ToolManager};
-use crate::interaction::{EditingKind, WidgetManager, WidgetState};
 use kurbo::{Affine, Point, Rect, Vec2};
 
 #[derive(Debug, Clone)]

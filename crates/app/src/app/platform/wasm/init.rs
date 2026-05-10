@@ -1,5 +1,5 @@
-use crate::app::config::AppConfig;
 use crate::app::App;
+use crate::app::config::AppConfig;
 use astra_web::file_ops;
 use std::sync::Arc;
 use wasm_bindgen::JsCast;

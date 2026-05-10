@@ -43,8 +43,11 @@ impl CanvasDocument {
     }
 
     pub fn visible_shapes_ordered(&self, viewport: Rect) -> Vec<&Shape> {
-        let candidates: HashSet<ShapeId> =
-            self.spatial_index.query_rect(viewport).into_iter().collect();
+        let candidates: HashSet<ShapeId> = self
+            .spatial_index
+            .query_rect(viewport)
+            .into_iter()
+            .collect();
         self.z_order
             .iter()
             .filter_map(|id| {

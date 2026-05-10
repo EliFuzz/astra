@@ -1,6 +1,6 @@
-use super::shape::Arrow;
 use super::super::line::PathStyle;
 use super::super::{ShapeId, ShapeStyle, ShapeTrait};
+use super::shape::Arrow;
 use kurbo::{Affine, BezPath, Point, Rect, Vec2};
 
 impl ShapeTrait for Arrow {

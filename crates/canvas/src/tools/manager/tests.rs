@@ -1,5 +1,5 @@
-use super::ToolManager;
 use super::super::ToolKind;
+use super::ToolManager;
 use kurbo::Point;
 
 #[test]

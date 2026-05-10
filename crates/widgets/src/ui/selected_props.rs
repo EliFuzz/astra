@@ -181,7 +181,7 @@ impl SelectedShapeProps {
                     }
                 }
                 props
-            },
+            }
         }
     }
 
@@ -236,7 +236,11 @@ impl SelectedShapeProps {
     }
 
     pub fn shows_edges(&self) -> bool {
-        self.is_rectangle || self.is_diamond || self.is_image || self.tool_is_rectangle || self.tool_is_diamond
+        self.is_rectangle
+            || self.is_diamond
+            || self.is_image
+            || self.tool_is_rectangle
+            || self.tool_is_diamond
     }
 
     pub fn shows_path_style(&self) -> bool {

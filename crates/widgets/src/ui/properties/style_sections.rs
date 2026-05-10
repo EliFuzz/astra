@@ -1,10 +1,10 @@
 use super::super::color_helpers::color_swatch_current;
 use super::super::{ColorPopover, SelectedShapeProps, UiAction, UiState};
-use crate::{
-    COLORS, ColorSwatch, IconButton, NoColorSwatch,
-    section_label as widgets_section_label, vertical_separator as widgets_vertical_separator,
-};
 use crate::icon;
+use crate::{
+    COLORS, ColorSwatch, IconButton, NoColorSwatch, section_label as widgets_section_label,
+    vertical_separator as widgets_vertical_separator,
+};
 use egui::{Color32, Rect, Vec2};
 
 const QUICK_STROKE_COLORS: &[usize] = &[10, 0, 6, 2, 13, 17];
@@ -39,12 +39,11 @@ pub(super) fn render_stroke_section(
             let (clicked, rect) = color_swatch_current(ui, ui_state.stroke_color, "Pick color");
             *stroke_current_rect = rect;
             if clicked {
-                ui_state.color_popover =
-                    if ui_state.color_popover == ColorPopover::StrokeFull {
-                        ColorPopover::None
-                    } else {
-                        ColorPopover::StrokeFull
-                    };
+                ui_state.color_popover = if ui_state.color_popover == ColorPopover::StrokeFull {
+                    ColorPopover::None
+                } else {
+                    ColorPopover::StrokeFull
+                };
             }
         });
     });
@@ -85,12 +84,11 @@ pub(super) fn render_fill_section(
             let (clicked, rect) = color_swatch_current(ui, current_fill, "Pick color");
             *fill_current_rect = rect;
             if clicked {
-                ui_state.color_popover =
-                    if ui_state.color_popover == ColorPopover::FillFull {
-                        ColorPopover::None
-                    } else {
-                        ColorPopover::FillFull
-                    };
+                ui_state.color_popover = if ui_state.color_popover == ColorPopover::FillFull {
+                    ColorPopover::None
+                } else {
+                    ColorPopover::FillFull
+                };
             }
         });
     });
@@ -113,7 +111,11 @@ pub(super) fn render_stroke_width_section(
             ];
             for (width, name, icon) in widths {
                 let is_selected = (ui_state.stroke_width - width).abs() < 0.1;
-                if IconButton::new(icon, name).small().selected(is_selected).show(ui) {
+                if IconButton::new(icon, name)
+                    .small()
+                    .selected(is_selected)
+                    .show(ui)
+                {
                     *action = Some(UiAction::SetStrokeWidth(width));
                 }
             }
@@ -138,7 +140,12 @@ pub(super) fn render_stroke_style_section(
             ];
             for (idx, name, icon) in styles {
                 let is_selected = props.stroke_style == idx;
-                if IconButton::new(icon, name).small().selected(is_selected).show(ui) && !is_selected {
+                if IconButton::new(icon, name)
+                    .small()
+                    .selected(is_selected)
+                    .show(ui)
+                    && !is_selected
+                {
                     *action = Some(UiAction::SetStrokeStyle(idx));
                 }
             }
@@ -163,7 +170,12 @@ pub(super) fn render_sloppiness_section(
             ];
             for (idx, name, icon) in levels {
                 let is_selected = props.sloppiness == idx;
-                if IconButton::new(icon, name).small().selected(is_selected).show(ui) && !is_selected {
+                if IconButton::new(icon, name)
+                    .small()
+                    .selected(is_selected)
+                    .show(ui)
+                    && !is_selected
+                {
                     *action = Some(UiAction::SetSloppiness(idx));
                 }
             }

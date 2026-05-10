@@ -1,6 +1,6 @@
-use super::binding::ArrowBinding;
 use super::super::line::PathStyle;
 use super::super::{ShapeId, ShapeStyle, StrokeStyle};
+use super::binding::ArrowBinding;
 use kurbo::{Point, Vec2};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;

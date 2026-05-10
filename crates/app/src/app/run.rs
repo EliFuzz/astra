@@ -1,5 +1,5 @@
-use super::{App, AppConfig, AppState};
 use super::platform::{self, PlatformAppFields, PlatformStateFields};
+use super::{App, AppConfig, AppState};
 use crate::ui::UiState;
 use astra_canvas::EventHandler;
 use astra_canvas::canvas::Canvas;
@@ -42,8 +42,7 @@ impl App {
         let vello_renderer = vello::Renderer::new(device, RendererOptions::default())
             .expect("Failed to create Vello renderer");
 
-        let texture_blitter =
-            vello::wgpu::util::TextureBlitter::new(device, surface.config.format);
+        let texture_blitter = vello::wgpu::util::TextureBlitter::new(device, surface.config.format);
 
         let egui_ctx = egui::Context::default();
         let egui_state = egui_winit::State::new(

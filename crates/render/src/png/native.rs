@@ -1,6 +1,4 @@
-use super::gpu::{
-    build_tile_scene, prepare_readback, RenderBuffer, TiledExport, STRIP_HEIGHT,
-};
+use super::gpu::{RenderBuffer, STRIP_HEIGHT, TiledExport, build_tile_scene, prepare_readback};
 use crate::vello_impl::{PngRenderResult, VelloRenderer};
 use std::io::Write;
 use vello::Scene;
@@ -68,10 +66,9 @@ pub fn export_scene_to_png_file(
 
     if export.should_embed_metadata() {
         if let Ok(json) = export.document.to_json_compact() {
-            if let Err(e) = encoder.add_ztxt_chunk(
-                astra_core::png::PNG_SCENE_METADATA_KEY.to_string(),
-                json,
-            ) {
+            if let Err(e) =
+                encoder.add_ztxt_chunk(astra_core::png::PNG_SCENE_METADATA_KEY.to_string(), json)
+            {
                 log::warn!("Failed to add metadata chunk: {:?}", e);
             }
         }
@@ -93,8 +90,8 @@ pub fn export_scene_to_png_file(
 
     log::info!(
         "Tiled export: {}x{} tiles ({}x{} each, max_tex={})",
-        (width + tile_w - 1) / tile_w,
-        (height + tile_h - 1) / tile_h,
+        width.div_ceil(tile_w),
+        height.div_ceil(tile_h),
         tile_w,
         tile_h,
         max_tex,

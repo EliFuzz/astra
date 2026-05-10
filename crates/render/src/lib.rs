@@ -15,7 +15,7 @@ pub use renderer::{
 pub use text_editor::{TextEditResult, TextEditState, TextKey, TextModifiers};
 
 #[cfg(feature = "vello-renderer")]
-pub use png::{RenderBuffer, TiledExport, STRIP_HEIGHT, build_tile_scene, prepare_readback};
+pub use png::{RenderBuffer, STRIP_HEIGHT, TiledExport, build_tile_scene, prepare_readback};
 
 #[cfg(all(not(target_arch = "wasm32"), feature = "vello-renderer"))]
 pub use png::{export_scene_to_png_file, render_scene_to_png};

@@ -1,7 +1,7 @@
 use egui::{Color32, Pos2, Rect, vec2};
 
-use super::quick::{QuickColor, quick_color_cell};
 use super::super::swatch::{ColorSwatch, colors_match};
+use super::quick::{QuickColor, quick_color_cell};
 use crate::colors::{COLORS, SHADE_LABELS};
 use crate::theme;
 
@@ -99,8 +99,10 @@ impl<'a> ColorGrid<'a> {
                                 for palette_color in COLORS.iter() {
                                     let color = palette_color.shades[shade_idx];
                                     let is_selected = colors_match(self.current_color, color);
-                                    let tooltip =
-                                        format!("{} {}", palette_color.name, SHADE_LABELS[shade_idx]);
+                                    let tooltip = format!(
+                                        "{} {}",
+                                        palette_color.name, SHADE_LABELS[shade_idx]
+                                    );
                                     let (clicked, _) = ColorSwatch::new(color, &tooltip)
                                         .selected(is_selected)
                                         .grid()

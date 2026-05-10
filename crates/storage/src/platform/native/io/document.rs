@@ -45,7 +45,8 @@ pub fn load_document() {
                         .unwrap_or(false);
 
                     let result = if is_excalidraw {
-                        CanvasDocument::shapes_from_json(&content).map_err(|error| error.to_string())
+                        CanvasDocument::shapes_from_json(&content)
+                            .map_err(|error| error.to_string())
                     } else {
                         CanvasDocument::from_json(&content).map_err(|error| error.to_string())
                     };

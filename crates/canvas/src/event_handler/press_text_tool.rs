@@ -2,8 +2,7 @@ use std::collections::HashMap;
 
 use crate::canvas::Canvas;
 use crate::selection::{
-    HANDLE_HIT_TOLERANCE, ManipulationState, MultiMoveState, hit_test_boundary,
-    hit_test_handles,
+    HANDLE_HIT_TOLERANCE, ManipulationState, MultiMoveState, hit_test_boundary, hit_test_handles,
 };
 use crate::shapes::Shape;
 use kurbo::Point;

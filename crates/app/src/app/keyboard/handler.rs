@@ -1,7 +1,7 @@
+use super::super::App;
+use super::super::ui_actions::dispatch::dispatch_action_simple;
 use super::maps;
 use super::text_edit;
-use super::super::ui_actions::dispatch::dispatch_action_simple;
-use super::super::App;
 use crate::ui::UiAction;
 use winit::event::{ElementState, KeyEvent};
 use winit::keyboard::{Key, NamedKey};

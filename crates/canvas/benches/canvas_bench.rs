@@ -4,7 +4,7 @@ use astra_canvas::canvas::CanvasDocument;
 
 fn bench_document_creation(c: &mut Criterion) {
     c.bench_function("document_create", |b| {
-        b.iter(|| CanvasDocument::default());
+        b.iter(CanvasDocument::default);
     });
 }
 

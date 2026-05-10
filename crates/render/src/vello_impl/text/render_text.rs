@@ -1,5 +1,5 @@
-use super::render_text_cache_key::text_layout_cache_key;
 use super::super::cache::{CachedTextLayout, GlyphRun};
+use super::render_text_cache_key::text_layout_cache_key;
 use crate::vello_impl::VelloRenderer;
 use kurbo::{Affine, Point, Rect, Stroke};
 use parley::layout::PositionedLayoutItem;
@@ -88,11 +88,7 @@ impl VelloRenderer {
             2 => parley::Alignment::End,
             _ => parley::Alignment::Start,
         };
-        layout.align(
-            None,
-            alignment,
-            parley::AlignmentOptions::default(),
-        );
+        layout.align(None, alignment, parley::AlignmentOptions::default());
 
         let layout_width = layout.width() as f64;
         let layout_height = layout.height() as f64;

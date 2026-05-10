@@ -1,6 +1,6 @@
+use crate::preferences::UserPreferences;
 use astra_canvas::canvas::CanvasDocument;
 use astra_canvas::shapes::Shape;
-use crate::preferences::UserPreferences;
 use std::cell::RefCell;
 
 thread_local! {

@@ -1,7 +1,7 @@
-use crate::platform::Instant;
-use super::create::generate_tool_seed;
 use super::super::{ToolKind, ToolState};
+use super::create::generate_tool_seed;
 use super::tool_manager::ToolManager;
+use crate::platform::Instant;
 use crate::shapes::Shape;
 use kurbo::Point;
 
@@ -40,7 +40,8 @@ impl ToolManager {
         if let ToolState::Active { current, .. } = &mut self.state {
             *current = point;
 
-            if self.current_tool == ToolKind::Freehand || self.current_tool == ToolKind::Highlighter {
+            if self.current_tool == ToolKind::Freehand || self.current_tool == ToolKind::Highlighter
+            {
                 if self.calligraphy_mode {
                     const M: f64 = 0.5;
                     const K: f64 = 120.0;

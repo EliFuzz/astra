@@ -33,7 +33,9 @@ impl Renderer for VelloRenderer {
             GridStyle::HorizontalLines => {
                 self.render_horizontal_lines(viewport, camera_transform, base_grid_size)
             }
-            GridStyle::CrossPlus => self.render_grid_crosses(viewport, camera_transform, base_grid_size),
+            GridStyle::CrossPlus => {
+                self.render_grid_crosses(viewport, camera_transform, base_grid_size)
+            }
             GridStyle::Dots => self.render_grid_dots(viewport, camera_transform, base_grid_size),
         }
 
@@ -128,12 +130,7 @@ impl Renderer for VelloRenderer {
     }
 }
 
-fn render_dot_placeholder(
-    scene: &mut vello::Scene,
-    center: Point,
-    transform: Affine,
-    zoom: f64,
-) {
+fn render_dot_placeholder(scene: &mut vello::Scene, center: Point, transform: Affine, zoom: f64) {
     let r = (1.5 / zoom).max(0.5);
     let dot = kurbo::Circle::new(center, r);
     scene.fill(
@@ -156,11 +153,5 @@ fn render_simplified_placeholder(
         scene.fill(Fill::NonZero, transform, fill, None, &rect);
     }
     let stroke = Stroke::new(style.stroke_width.min(1.5));
-    scene.stroke(
-        &stroke,
-        transform,
-        style.stroke_with_opacity(),
-        None,
-        &rect,
-    );
+    scene.stroke(&stroke, transform, style.stroke_with_opacity(), None, &rect);
 }

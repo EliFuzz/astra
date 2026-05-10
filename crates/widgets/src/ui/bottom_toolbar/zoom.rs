@@ -1,6 +1,6 @@
 use super::super::{UiAction, UiState};
-use crate::{IconButton, theme};
 use crate::icon;
+use crate::{IconButton, theme};
 
 pub(super) fn render_zoom_section(ui: &mut egui::Ui, state: &UiState) -> Option<UiAction> {
     let mut action = None;
@@ -52,12 +52,9 @@ pub(super) fn render_zoom_section(ui: &mut egui::Ui, state: &UiState) -> Option<
     } else {
         "Zoom to fit all elements"
     };
-    if IconButton::new(
-        icon!("zoom-fit.png"),
-        fit_tooltip,
-    )
-    .small()
-    .show(ui)
+    if IconButton::new(icon!("zoom-fit.png"), fit_tooltip)
+        .small()
+        .show(ui)
     {
         action = Some(UiAction::ZoomToFit);
     }

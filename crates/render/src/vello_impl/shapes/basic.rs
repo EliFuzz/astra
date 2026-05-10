@@ -23,18 +23,13 @@ impl VelloRenderer {
             }
             _ => {
                 let rgba = fill_color.to_rgba8();
-                let bg_color = Color::from_rgba8(
-                    rgba.r,
-                    rgba.g,
-                    rgba.b,
-                    (rgba.a as f32 * 0.15) as u8,
-                );
+                let bg_color =
+                    Color::from_rgba8(rgba.r, rgba.g, rgba.b, (rgba.a as f32 * 0.15) as u8);
                 self.scene
                     .fill(Fill::NonZero, transform, bg_color, None, fill_path);
 
                 let bounds = bounds_path.bounding_box();
-                let pattern_path =
-                    generate_fill_pattern(fill_pattern, bounds, stroke_width, seed);
+                let pattern_path = generate_fill_pattern(fill_pattern, bounds, stroke_width, seed);
 
                 self.scene
                     .push_clip_layer(Fill::NonZero, transform, fill_path);

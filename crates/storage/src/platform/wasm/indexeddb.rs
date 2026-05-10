@@ -1,5 +1,5 @@
-use crate::{BoxFuture, Storage, StorageError, StorageResult};
 use crate::preferences::{PREFERENCES_KEY, UserPreferences};
+use crate::{BoxFuture, Storage, StorageError, StorageResult};
 use astra_canvas::canvas::CanvasDocument;
 use rexie::{ObjectStore, Rexie, TransactionMode};
 use wasm_bindgen::JsValue;
@@ -162,10 +162,7 @@ impl Storage for IndexedDbStorage {
 
             let store = transaction.store(STORE_NAME).map_err(other_error)?;
 
-            let js_keys = store
-                .get_all_keys(None, None)
-                .await
-                .map_err(other_error)?;
+            let js_keys = store.get_all_keys(None, None).await.map_err(other_error)?;
 
             let mut ids = Vec::new();
             for key in js_keys {

@@ -1,5 +1,5 @@
-use crate::renderer::ShapeRenderer;
 use super::cache::CachedTextLayout;
+use crate::renderer::ShapeRenderer;
 use kurbo::{Affine, BezPath, Rect};
 use parley::{FontContext, LayoutContext};
 use peniko::{Brush, Color};

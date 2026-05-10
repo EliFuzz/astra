@@ -1,6 +1,6 @@
-mod types;
 mod impl_line;
 mod shape_trait;
+mod types;
 
 #[cfg(test)]
 mod tests;

@@ -1,6 +1,4 @@
-use super::{
-    Arrow, Diamond, Ellipse, Freehand, Group, Image, Line, Math, Rectangle, Text,
-};
+use super::{Arrow, Diamond, Ellipse, Freehand, Group, Image, Line, Math, Rectangle, Text};
 use astra_core::{ShapeId, ShapeStyle, ShapeTrait};
 use kurbo::{BezPath, Point, Rect};
 use serde::{Deserialize, Serialize};

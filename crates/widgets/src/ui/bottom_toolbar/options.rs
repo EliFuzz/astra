@@ -1,33 +1,27 @@
-use super::grid_style::grid_style_button;
 use super::super::color_helpers::color_swatch_current;
 use super::super::{ColorPopover, UiAction, UiState};
-use crate::{ColorGrid, IconButton};
-use crate::theme;
-use astra_render::GridStyle;
+use super::grid_style::grid_style_button;
 use crate::icon;
+use crate::theme;
+use crate::{ColorGrid, IconButton};
+use astra_render::GridStyle;
 use egui::{Context, CursorIcon, Rect, Sense, Stroke, Vec2, vec2};
 
 pub(super) fn render_history_section(ui: &mut egui::Ui) -> Option<UiAction> {
     let mut action = None;
 
-    if IconButton::new(
-        icon!("undo.png"),
-        "Undo (Ctrl+Z)",
-    )
-    .small()
-    .show(ui)
+    if IconButton::new(icon!("undo.png"), "Undo (Ctrl+Z)")
+        .small()
+        .show(ui)
     {
         action = Some(UiAction::Undo);
     }
 
     ui.add_space(2.0);
 
-    if IconButton::new(
-        icon!("redo.png"),
-        "Redo (Ctrl+Shift+Z)",
-    )
-    .small()
-    .show(ui)
+    if IconButton::new(icon!("redo.png"), "Redo (Ctrl+Shift+Z)")
+        .small()
+        .show(ui)
     {
         action = Some(UiAction::Redo);
     }
@@ -89,10 +83,12 @@ fn render_theme_toggle(ui: &mut egui::Ui) -> bool {
         let r = 6.0;
 
         if is_dark {
-            ui.painter().circle_stroke(center, r, Stroke::new(1.5, icon_color));
+            ui.painter()
+                .circle_stroke(center, r, Stroke::new(1.5, icon_color));
             let inner_r = r * 0.65;
             let offset = Vec2::new(r * 0.35, -r * 0.35);
-            ui.painter().circle_filled(center + offset, inner_r, theme::panel_bg());
+            ui.painter()
+                .circle_filled(center + offset, inner_r, theme::panel_bg());
         } else {
             ui.painter().circle_filled(center, r * 0.55, icon_color);
             let ray_len = 3.0;
@@ -102,14 +98,17 @@ fn render_theme_toggle(ui: &mut egui::Ui) -> bool {
                 let dir = Vec2::new(angle.cos(), angle.sin());
                 let start = center + dir * ray_dist;
                 let end = center + dir * (ray_dist + ray_len);
-                ui.painter().line_segment([start, end], Stroke::new(1.5, icon_color));
+                ui.painter()
+                    .line_segment([start, end], Stroke::new(1.5, icon_color));
             }
         }
     }
 
     let tooltip = if is_dark { "Light Theme" } else { "Dark Theme" };
     let clicked = response.clicked();
-    response.on_hover_text(tooltip).on_hover_cursor(CursorIcon::PointingHand);
+    response
+        .on_hover_text(tooltip)
+        .on_hover_cursor(CursorIcon::PointingHand);
     clicked
 }
 
@@ -121,13 +120,10 @@ pub(super) fn render_snap_section(ui: &mut egui::Ui, state: &UiState) -> Option<
     } else {
         "Grid Snap: Off"
     };
-    if IconButton::new(
-        icon!("snap-grid.png"),
-        grid_snap_tooltip,
-    )
-    .small()
-    .selected(state.grid_snap_enabled)
-    .show(ui)
+    if IconButton::new(icon!("snap-grid.png"), grid_snap_tooltip)
+        .small()
+        .selected(state.grid_snap_enabled)
+        .show(ui)
     {
         action = Some(UiAction::ToggleGridSnap);
     }
@@ -139,13 +135,10 @@ pub(super) fn render_snap_section(ui: &mut egui::Ui, state: &UiState) -> Option<
     } else {
         "Smart Guides: Off"
     };
-    if IconButton::new(
-        icon!("snap-shapes.png"),
-        smart_snap_tooltip,
-    )
-    .small()
-    .selected(state.smart_snap_enabled)
-    .show(ui)
+    if IconButton::new(icon!("snap-shapes.png"), smart_snap_tooltip)
+        .small()
+        .selected(state.smart_snap_enabled)
+        .show(ui)
     {
         action = Some(UiAction::ToggleSmartSnap);
     }
@@ -157,13 +150,10 @@ pub(super) fn render_snap_section(ui: &mut egui::Ui, state: &UiState) -> Option<
     } else {
         "Angle Snap: Off"
     };
-    if IconButton::new(
-        icon!("angle.png"),
-        angle_snap_tooltip,
-    )
-    .small()
-    .selected(state.angle_snap_enabled)
-    .show(ui)
+    if IconButton::new(icon!("angle.png"), angle_snap_tooltip)
+        .small()
+        .selected(state.angle_snap_enabled)
+        .show(ui)
     {
         action = Some(UiAction::ToggleAngleSnap);
     }
@@ -190,10 +180,13 @@ pub(super) fn render_bg_color_popover(
 
     if ctx.input(|i| i.pointer.any_pressed()) {
         let grid_id = egui::Id::new("color_grid");
-        let covers_pointer = ctx.layer_id_at(ctx.input(|i| i.pointer.interact_pos().unwrap_or_default()))
+        let covers_pointer = ctx
+            .layer_id_at(ctx.input(|i| i.pointer.interact_pos().unwrap_or_default()))
             .map(|layer| layer.id == grid_id)
             .unwrap_or(false);
-        if !covers_pointer && !bg_rect.contains(ctx.input(|i| i.pointer.interact_pos().unwrap_or_default())) {
+        if !covers_pointer
+            && !bg_rect.contains(ctx.input(|i| i.pointer.interact_pos().unwrap_or_default()))
+        {
             state.color_popover = ColorPopover::None;
         }
     }

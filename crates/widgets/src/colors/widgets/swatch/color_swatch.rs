@@ -1,6 +1,4 @@
-use egui::{
-    Color32, CornerRadius, CursorIcon, Rect, Sense, Stroke, StrokeKind, Ui, Vec2, vec2,
-};
+use egui::{Color32, CornerRadius, CursorIcon, Rect, Sense, Stroke, StrokeKind, Ui, Vec2, vec2};
 
 use crate::{sizing, theme};
 
