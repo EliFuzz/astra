@@ -78,9 +78,8 @@ impl Shape {
         midpoint_radius: f64,
         border_radius: f64,
     ) -> Option<(Point, BindSide, f64)> {
-        match self {
-            Shape::Line(_) | Shape::Arrow(_) | Shape::Group(_) | Shape::Freehand(_) => return None,
-            _ => {}
+        if matches!(self, Shape::Line(_) | Shape::Arrow(_) | Shape::Freehand(_)) {
+            return None;
         }
         let b = self.bounds();
         if b.width() < 1.0 || b.height() < 1.0 {
