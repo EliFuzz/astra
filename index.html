@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astra</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preload" href="./pkg/astra.wasm" as="fetch" type="application/wasm" crossorigin />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #121218;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  
+  <script>
+    document.addEventListener('keydown', function (e) {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        (e.key === 'e' ||
+          e.key === 'E' ||
+          e.key === 's' ||
+          e.key === 'S' ||
+          e.key === 'g' ||
+          e.key === 'G')
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
+  <script type="module">
+    import init, { register_canvas_font, register_math_font, commit_fonts } from './pkg/astra.js';
+
+    const FONTS = {
+      handwriting:
+        'https://cdn.jsdelivr.net/npm/@excalidraw/excalidraw@0.18.0/dist/prod/fonts/Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2',
+      math: 'https://cdn.jsdelivr.net/gh/stipub/stixfonts@master/source/STIXTwoMath.input.ttf',
+      sans: 'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf',
+    };
+
+    async function run() {
+      try {
+        const [handwritingData, mathData, sansData] = await Promise.all([
+            fetch(FONTS.handwriting).then((r) => r.arrayBuffer()),
+            fetch(FONTS.math).then((r) => r.arrayBuffer()),
+            fetch(FONTS.sans).then((r) => r.arrayBuffer()),
+        ]);
+
+        await init('./pkg/astra.wasm');
+
+        register_canvas_font(new Uint8Array(handwritingData));
+        register_canvas_font(new Uint8Array(sansData));
+        register_math_font(new Uint8Array(mathData));
+        commit_fonts();
+      } catch (error) {
+        loading.innerHTML = `<div">${error.message || 'Unknown error'}</div>`;
+      }
+    }
+    await run();
+    </script>
+  </body>
+</html>
