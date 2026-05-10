@@ -1,4 +1,4 @@
-use super::super::effects::{apply_hand_drawn_effect, generate_fill_pattern};
+use super::super::effects::generate_fill_pattern;
 use crate::vello_impl::VelloRenderer;
 use astra_canvas::shapes::{FillPattern, StrokeStyle};
 use kurbo::{Affine, BezPath, Shape as KurboShape, Stroke};
@@ -96,6 +96,7 @@ impl VelloRenderer {
 
     pub(crate) fn render_stroke_only(
         &mut self,
+        shape_id: &str,
         path: &BezPath,
         style: &astra_canvas::shapes::ShapeStyle,
         stroke_style: StrokeStyle,
@@ -120,7 +121,7 @@ impl VelloRenderer {
         }
 
         if roughness > 0.0 {
-            let path1 = apply_hand_drawn_effect(path, roughness, self.zoom, seed, 0);
+            let path1 = self.get_cached_hand_drawn(shape_id, path, roughness, seed, 0);
             self.scene.stroke(
                 &stroke,
                 transform,
@@ -128,7 +129,7 @@ impl VelloRenderer {
                 None,
                 &path1,
             );
-            let path2 = apply_hand_drawn_effect(path, roughness, self.zoom, seed, 1);
+            let path2 = self.get_cached_hand_drawn(shape_id, path, roughness, seed, 1);
             self.scene.stroke(
                 &stroke,
                 transform,
@@ -171,6 +172,6 @@ impl VelloRenderer {
             );
         }
 
-        self.render_stroke_only(path, style, stroke_style, transform);
+        self.render_stroke_only(shape_id, path, style, stroke_style, transform);
     }
 }

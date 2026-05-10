@@ -63,6 +63,7 @@ impl ShapeRenderer for VelloRenderer {
                     );
                 } else {
                     self.render_stroke_only(
+                        &shape.id().to_string(),
                         &path,
                         shape.style(),
                         line.stroke_style,
@@ -72,7 +73,13 @@ impl ShapeRenderer for VelloRenderer {
             }
             Shape::Arrow(arrow) => {
                 let path = shape.to_path();
-                self.render_stroke_only(&path, shape.style(), arrow.stroke_style, shape_transform);
+                self.render_stroke_only(
+                    &shape.id().to_string(),
+                    &path,
+                    shape.style(),
+                    arrow.stroke_style,
+                    shape_transform,
+                );
             }
             Shape::Freehand(freehand) => {
                 if freehand.closed {
@@ -88,6 +95,7 @@ impl ShapeRenderer for VelloRenderer {
                 } else {
                     let path = shape.to_path();
                     self.render_stroke_only(
+                        &shape.id().to_string(),
                         &path,
                         shape.style(),
                         StrokeStyle::Solid,
